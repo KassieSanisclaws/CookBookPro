@@ -8,16 +8,24 @@
 import SwiftUI
 
 struct RecipeListView: View {
+    @StateObject private var vm = RecipeViewModel()
     
     var body: some View {
         
      NavigationStack {
             
             List {
-                Text("Recipes Coming Soon")
+                
+                ForEach(vm.recipes) { recipe in
+                    
+                    Text(recipe.title)
+                }
             }
             .navigationTitle("CookBook")
         }
+     .task {
+         vm.loadRecipes()
+      }
     }
 }
 

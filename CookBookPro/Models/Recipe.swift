@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct Recipe: Identifiable, Codable {
-    var id: String
+    @DocumentID var id: String?
     var title: String
     var imageURL: String
     var category: String
