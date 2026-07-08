@@ -65,20 +65,18 @@ struct RegisterView: View {
         }
         
         AuthService.shared.signUp(
-              email: email,
-              password: password) { error in
-                  if let error {
-                      DispatchQueue.main.async {
-                          errorMsg = error.localizedDescription
-                          showErr = true
-                      }
-                      return
-                  }
-                  DispatchQueue.main.async {
-                      dismiss()
-                  }
-              }
-       }
+            email: email,
+            password: password) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success: dismiss()
+                    case .failure(let error):
+                        errorMsg = error.localizedDescription
+                        showErr = true
+                    }
+                }
+            }
+     }
 }
 
 #Preview {

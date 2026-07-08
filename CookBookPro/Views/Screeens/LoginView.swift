@@ -94,15 +94,17 @@ struct LoginView: View {
         AuthService.shared.signIn(
             email: email,
             password: password
-        ) { error in
-            if let error {
+        ) { result in
+        
                 DispatchQueue.main.async {
-                    errorMsg = error.localizedDescription
-                    showErr = true
+                    switch result {
+                    case .success: print("Login Successful")
+                    case .failure(let error): errorMsg = error.localizedDescription
+                        showErr = true
+                    }
                 }
-            }
-        }
-    }
+           }
+      }
 }
 
 #Preview {

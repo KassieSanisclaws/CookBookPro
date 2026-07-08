@@ -7,9 +7,12 @@
 
 import Foundation
 
-struct AppUser: Codable {
+struct AppUser: Codable, Identifiable {
+    var id: String { uid }
+    
     var uid: String
     var email: String
     var username: String
     var role: String
 }
+ 
